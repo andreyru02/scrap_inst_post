@@ -31,11 +31,19 @@ class Inst:
         passwd = self.driver.find_element_by_name('password')
         passwd.send_keys(self.password)
         passwd.send_keys(Keys.ENTER)
-        time.sleep(3)
+        time.sleep(5)
         try:
-            self.driver.find_element_by_class_name('eiCW-')
+            self.driver.find_element_by_class_name('gmFkV')
         except NoSuchElementException:
-            sys.exit(self.driver.find_element_by_class_name('eiCW-').text)
+        	try:
+        		err = self.driver.find_element_by_class_name('eiCW-').text
+        		self.driver.quit()
+        		sys.exit(err + '\nРабота завершена с ошибкой.')
+        	except NoSuchElementException:
+        		err = self.driver.find_element_by_class_name('O4QwN').text
+        		self.driver.quit()
+        		sys.exit(err + '\nРабота завершена с ошибкой.')
+        		
 
         time.sleep(10)
         print(datetime.today().strftime(f'%H:%M:%S | Авторизация в Instagram выполнена.'))
